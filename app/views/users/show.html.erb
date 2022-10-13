@@ -6,13 +6,17 @@
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
+  <strong>Icon:</strong>
+  <% if @user.icon? %>
+    <p class="user_icon"><%= image_tag @user.icon.url %></p>
+  <% else %>
+    <p class="user_icon"><%= image_tag 'user_default_icon.png' %></p>
+  <% end %>
 </p>
 
 <p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
+  <strong>Email:</strong>
+  <%= @user.email %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
