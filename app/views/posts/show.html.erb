@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <strong>User:</strong>
+  <%= @post.user.name %>
+</p>
 
 <p>
   <strong>Content:</strong>
   <%= @post.content %>
 </p>
 
+<% if @post.image.file != nil %>
 <p>
   <strong>Image:</strong>
   <%= @post.image %>
 </p>
+<% end %>
 
 <p>
   <strong>User:</strong>
   <%= @post.user_id %>
 </p>
 
+<% if @post.user == current_user %>
 <%= link_to 'Edit', edit_post_path(@post) %> |
+<% end %>
 <%= link_to 'Back', posts_path %>

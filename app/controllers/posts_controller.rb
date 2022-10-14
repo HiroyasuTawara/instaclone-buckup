@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  include SessionsHelper
+  before_action :ensure_user, only: %i[ edit update destroy ]
+  skip_before_action :login_required, only:[:index, :show]
   # GET /posts
   def index
     @posts = Post.all
@@ -8,6 +9,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
@@ -21,13 +23,19 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
+    @post = current_user.posts.build(post_params)
+    return render :new if params[:back]
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to post_url(@post), notice: 'Post was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def confirm
+    @post = Post.new(post_params)
+    @post.user_id = current_post.id 
+    render :new if @post.invalid?
   end
 
   # PATCH/PUT /posts/1
@@ -46,13 +54,14 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  
+  def ensure_user
+    @posts = current_user.posts
+    @post = @posts.find_by(id: params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:content, { image: [] }, :user_id)
-    end
+  def post_params
+    params.require(:post).permit(:content, :user_id, { image: [] }, :image_cache)
+  end
+
 end
