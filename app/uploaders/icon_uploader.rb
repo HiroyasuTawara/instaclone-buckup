@@ -7,7 +7,7 @@ class IconUploader < CarrierWave::Uploader::Base
   end
 
   def default_url(*args)
-    picture-user_default_icon.png
+    "/images/" + [version_name, "user_default_icon.png"].compact.join('_')
   end
 
   def extension_whitelist

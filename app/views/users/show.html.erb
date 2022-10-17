@@ -7,11 +7,9 @@
 
 <p>
   <strong>Icon:</strong>
-  <% if @user.icon? %>
-    <p class="user_icon"><%= image_tag @user.icon.url %></p>
-  <% else %>
-    <p class="user_icon"><%= image_tag 'user_default_icon.png' %></p>
-  <% end %>
+    <p class="user_icon">
+      <%= image_tag @user.icon.url %>
+    </p>
 </p>
 
 <p>

@@ -8,10 +8,12 @@
   <%= @post.content %>
 </p>
 
-<% if @post.image.file != nil %>
+<% if @post.image != nil %>
 <p>
   <strong>Image:</strong>
-  <%= @post.image %>
+  <%= @post.image.each do |img| %>
+  <%= image_tag img.to_s %>
+  <% end %>
 </p>
 <% end %>
 

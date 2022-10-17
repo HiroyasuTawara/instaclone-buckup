@@ -16,8 +16,15 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.content %></td>
-        <td><%= post.image %></td>
-        <td><%= post.user_id %></td>
+        <% if post.image != nil %>
+          <p>
+            <strong>Image:</strong>
+            <%= post.image.each do |img| %>
+            <%= image_tag img.to_s %>
+            <% end %>
+          </p>
+        <% end %>
+        <td><%= post.user.name %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
