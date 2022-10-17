@@ -1,26 +1,24 @@
-<p>
-  <strong>User:</strong>
-  <%= @post.user.name %>
-</p>
+<div class="row justify-content-center">
+  <div class="col-6 mb-5">
 
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<% if @post.image != nil %>
-<p>
-  <strong>Image:</strong>
-  <%= @post.image.each do |img| %>
-  <%= image_tag img.to_s %>
-  <% end %>
-</p>
-<% end %>
-
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
+  <div class="card mx-auto box-shadow">
+    <div class="block_post">
+      <div class="image">
+        <% if @post.image != nil %>
+          <p>
+            <% @post.image.each do |img| %>
+              <%= image_tag img.to_s %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+      <div class="name"><i class="fa-solid fa-user"></i> <%= @post.user.name.truncate(14) %></div>
+      <div class="date"><%= @post.created_at.strftime("%y-%m-%d %H:%M") %></div>
+      <div class="text"><%= @post.content.truncate(140) %></div>
+    </div>
+  </div>
+</div>
+</div>
 
 <% if @post.user == current_user %>
 <%= link_to 'Edit', edit_post_path(@post) %> |

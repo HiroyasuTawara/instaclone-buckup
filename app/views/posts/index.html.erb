@@ -1,38 +1,61 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+  <% @posts.each do |post| %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Image</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="row justify-content-center">
+        <div class="col-6 mb-5">
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.content %></td>
-        <% if post.image != nil %>
-          <p>
-            <strong>Image:</strong>
-            <%= post.image.each do |img| %>
-            <%= image_tag img.to_s %>
-            <% end %>
-          </p>
-        <% end %>
-        <td><%= post.user.name %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <div class="card mx-auto box-shadow">
+            <div class="block_post">
+              <div class="image">
+                <% if post.image != nil %>
+                  <p>
+                    <% post.image.each do |img| %>
+                      <%= image_tag img.to_s, class:"card-img-top" %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+              <div class="name"><i class="fa-solid fa-user"></i> <%= post.user.name.truncate(14) %></div>
+              <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %></div>
+              <div class="text"><%= post.content.truncate(140) %></div>
+            </div>
+            
+            <div class="icons">
+              <% if post.user == current_user %>
+                <span class="edit">
+                  <span class="tooltips">編集</span>
+                  <%= link_to edit_post_path(post.id) do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                </span>
 
-<br>
+                <span class="delete">
+                  <span class="tooltips">削除</span>
+                  <%= link_to post_path(post.id), method: :delete, data: { confirm: '投稿を削除してよろしいですか？'} do %>
+                    <i class="fa-sharp fa-solid fa-trash"></i>
+                  <% end %>
+                </span>
+              <% end %>
+
+              <span class="show">
+                <span class="tooltips">詳細</span>
+                <%= link_to post_path(post.id) do %>
+                  <i class="fa-solid fa-file"></i>
+                <% end %>
+              </span>
+            </div>
+
+  
+            
+          
+          </div>
+
+        </div>
+      </div>
+      
+  <% end %>
+    
+
 
 <%= link_to 'New Post', new_post_path %>
