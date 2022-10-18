@@ -17,3 +17,4 @@ import '../stylesheets/application';
 import '../stylesheets/style';
 
 import "./hidden_menu"
+import "./tooltips"

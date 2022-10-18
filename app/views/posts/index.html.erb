@@ -12,7 +12,7 @@
                 
                 <% if current_user.id == post.user_id %>
                 <div class="menu_icon">
-                  <div class="modal-open">
+                  <div class="modal-open", data-toggle="tooltip", title="投稿者用メニュー">
                     <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
                   </div>
                 </div>
@@ -51,21 +51,17 @@
 
                   <div class="icons">
                     <% unless @favorite.present? %>
-                      <span>
-                        <br>                       
-                        <span class="tooltips">Favorite!</span>
+                      <div data-toggle="tooltip", title="Favorite!">
                         <%= link_to favorites_path(post_id: post.id), method: :post do %>
                           <i class="fa-regular fa-heart fa-2x text-muted"></i>
                         <% end %>
-                      </span>
+                      </div>
                     <% else %>
-                      <span>
-                        <br> 
-                        <span class="tooltips">UnFavorite!</span>
+                      <div data-toggle="tooltip", title="UnFavorite!">
                         <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
                           <i class="fa-solid fa-heart fa-2x text-danger"></i>
                         <% end %>
-                      </span>
+                      </div>
                     <% end %>  
                   </div>
 

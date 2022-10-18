@@ -27,7 +27,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto ">
               <% if logged_in? %>
-                <li class="nav-item active">
+                <li class="nav-item active", data-toggle="tooltip", title="プロフィールを確認">
                   <%= link_to user_path(current_user.id), class: "nav-link" do %><i class="fa-solid fa-user"> <%= @current_user.name %> でログイン中</i><% end %>
                 </li>
                 <li class="nav-item active" , data-toggle="tooltip", title="ログアウト">

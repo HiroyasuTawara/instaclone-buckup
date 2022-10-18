@@ -74,27 +74,6 @@ div.post_block {
       .icons {
         height: 46px;
         display: inline-block;
-        span{
-          position: relative;
-          br {
-            display: none;
-          }
-          span.tooltips {
-            display: none;
-            position: absolute;
-            bottom: 24px;
-            z-index: 1000;
-            padding: 0.3em;
-            color: #FFFFFF;
-            background: #777;
-            border-radius: 0.5em;
-            white-space: nowrap;
-          }
-        }
-        span:hover .tooltips {
-          display: block;
-        }
-  
       }
     }
     
