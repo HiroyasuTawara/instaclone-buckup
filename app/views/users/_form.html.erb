@@ -1,3 +1,5 @@
+
+<div class="row  p-4 justify-content-center">
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
@@ -11,38 +13,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
+  <div class="row mb-2 justify-content-center">
     <strong>ユーザーアイコン:</strong>
+  </div>
+  
+
+  <div class="row mb-3 justify-content-center">  
     <% if @user.icon? %>
-      <p class="user_icon"><%= image_tag @user.icon.url %></p>
+      <%= image_tag @user.icon.url, class:"icon_image" %>
     <% else %>
-      <p class="user_icon"><%= image_tag 'user_default_icon.png' %></p>
+      <%= image_tag 'user_default_icon.png', class:"icon_image" %>
     <% end %>
-    <%= form.label :icon %>
-    <%= form.file_field :icon %>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class="form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+    <%= form.text_field :name, class:"form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+  <div class="form-group row">
+    <%= form.label :icon, class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+    <%= form.file_field :icon, class:"form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+  <div class="form-group row">
+    <%= form.label :eamil, class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+    <%= form.text_field :email, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :password, class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+    <%= form.text_field :password, class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :password_confirmation, class:"col-sm-6 col-form-label" do %>パスワード(確認)<% end %>
+    <div class="col-sm-10">
+    <%= form.text_field :password_confirmation, class:"form-control" %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit "create!"%>
+    <%= form.submit class:"btn btn-primary mt-4" %>
   </div>
+
 <% end %>
+</div>

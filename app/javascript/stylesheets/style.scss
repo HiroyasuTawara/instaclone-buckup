@@ -4,6 +4,22 @@ nav {
   background-repeat: no-repeat;
 }
 
+img.icon_image{
+  width: 12%;
+  height: auto;
+  margin-right: 4px;
+  background: #777;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%; 
+  border-radius: 50%;
+}
+
+label{
+  margin-right: 8px;
+}
+
 div.post_block {
   width: 470px;
   display: block;
@@ -27,17 +43,6 @@ div.post_block {
       .name {
         display: inline;
         font-weight: bold;
-        img{
-          width: 32px;
-          height: 32px;
-          margin-right: 4px;
-          background: #777;
-          -moz-border-radius: 32px;
-          -webkit-border-radius: 32px;
-          -o-border-radius: 32px;
-          -ms-border-radius: 32px; 
-          border-radius: 32px;
-        }
       }
       .menu_icon{
         display: inline;

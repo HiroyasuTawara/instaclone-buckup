@@ -1,22 +1,16 @@
-<h4 class="col-6 pt-3 pb-1">
-  <% if logged_in? %>
-    <%= link_to '+New Post', new_post_path, class:"btn btn-outline-primary" %>
-  <% end %>
-</h4>
-
 <% @posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
           <div class="post_block">
             <div class="block_text">
 
-              <div class="post_header">
+              <div class="post_header d-flex align-items-center">
                 <div class="name">
-                  <%= image_tag post.user.icon.url class:"icon_image" %>
+                  <%= image_tag post.user.icon.url, class:"icon_image" %>
                   <%= post.user.name.truncate(14) %>
                 </div>
                 
-                <% if current_user == post.user_id %>
+                <% if current_user.id == post.user_id %>
                 <div class="menu_icon">
                   <div class="modal-open">
                     <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
@@ -78,8 +72,8 @@
                 <% end %>
 
                 <div class="contents">
-                  <%= post.content.truncate(9) %>
-                  <%= link_to post_path(post.id) do %> <p class="text-muted">詳細を確認する</p> <% end %>
+                  <%= post.content.truncate(28) %>
+                  <%= link_to post_path(post.id) do %> <p class="text-muted">+詳細を確認する</p> <% end %>
                 </div>
                 <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
                 

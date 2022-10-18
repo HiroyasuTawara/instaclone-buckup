@@ -1,26 +1,62 @@
-<div class="row justify-content-center">
-  <div class="col-6 mb-5">
+<div class="row justify-content-center mb-5">
+  <div class="post_block">
+    <div class="block_text">
 
-  <div class="card mx-auto box-shadow">
-    <div class="block_post">
-      <div class="image">
-        <% if @post.image != nil %>
-          <p>
-            <% @post.image.each do |img| %>
-              <%= image_tag img.to_s %>
-            <% end %>
-          </p>
+      <div class="post_header d-flex align-items-center">
+        <div class="name">
+          <%= image_tag @post.user.icon.url, class:"icon_image" %>
+          <%= @post.user.name.truncate(14) %>
+        </div>
+        
+        <% if current_user.id == @post.user_id %>
+        <div class="menu_icon">
+          <div class="modal-open">
+            <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
+          </div>
+        </div>
+        
+
+        
+        <div class="modal-container">
+          <div class="modal-body">
+            
+            <div class="modal-close">×</div>
+            
+            <div class="modal-content">
+              <ul class="list-group text-center">
+                <li class="list-group-item"><%= link_to "投稿を編集する", edit_post_path(@post.id), class:"text-secondary"  %></li>
+                <li class="list-group-item"><%= link_to "投稿を削除する", post_path(@post.id), method: :delete, class:"text-danger", data: { confirm: '投稿を削除してよろしいですか？'}  %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
+        
+        
+      </div>
+
+      <div class="image_area">
+        <% @post.image.each do |img| %>
+          <%= image_tag img.to_s %>
         <% end %>
       </div>
-      <div class="name"><i class="fa-solid fa-user"></i> <%= @post.user.name.truncate(14) %></div>
-      <div class="date"><%= @post.created_at.strftime("%y-%m-%d %H:%M") %></div>
-      <div class="text"><%= @post.content.truncate(140) %></div>
+
+      <div class="text_area">
+
+        <div class="contents">
+          <%= @post.content %>
+        </div>
+        <div class="date"><%= @post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
+        
+        
+      </div>
     </div>
   </div>
 </div>
-</div>
 
-<% if @post.user == current_user %>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<% end %>
-<%= link_to 'Back', posts_path %>
+<div class="row  pb-3 justify-content-center">
+  <div class="md-4">
+    <%= link_to 'Back', posts_path,  class:"btn btn-secondary md-4" %>
+  </div>
+</div>

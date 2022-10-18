@@ -1,21 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="container bg-light rounded">
+  <div class="row  mb-4 justify-content-center">
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </div>
+  
+  <div class="row  mb-2 justify-content-center">
+    <strong>Icon:</strong>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+  <div class="row  mb-4 justify-content-center">
+      <%= image_tag @user.icon.url, class:"icon_image" %>
+  </div>
+  
+  <div class="row  mb-4 justify-content-center">
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </div>
+  
+  <div class="row  pb-3 justify-content-center">
+    <div class="md-4">
+      <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary md-4" %> 
+      <%= link_to 'Back', posts_path,  class:"btn btn-secondary md-4" %>
+    </div>
+  </div>
 
-<p>
-  <strong>Icon:</strong>
-    <p class="user_icon">
-      <%= image_tag @user.icon.url %>
-    </p>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+</div>
