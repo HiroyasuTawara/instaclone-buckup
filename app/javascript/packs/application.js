@@ -15,3 +15,5 @@ ActiveStorage.start()
 import 'bootstrap';
 import '../stylesheets/application';
 import '../stylesheets/style';
+
+import "./hidden_menu"

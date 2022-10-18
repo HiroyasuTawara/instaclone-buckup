@@ -1,61 +1,86 @@
-<p id="notice"><%= notice %></p>
+<h4 class=" col-6 pt-3 pb-1">
+  <% if logged_in? %>
+    <%= link_to '+New Post', new_post_path, class:"btn btn-outline-primary" %>
+  <% end %>
+</h4>
 
-  <% @posts.each do |post| %>
+<% @posts.each do |post| %>
+  <div class="row justify-content-center mb-5">
+          <div class="post_block">
+            <div class="block_text">
 
-      <div class="row justify-content-center">
-        <div class="col-6 mb-5">
+              <div class="post_header">
+                <div class="name">
+                  <%= image_tag post.user.icon.url class:"icon_image" %>
+                  <%= post.user.name.truncate(14) %>
+                </div>
+                
+                <% if logged_in? %>
+                <div class="menu_icon">
+                  <div class="modal-open">
+                    <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
+                  </div>
+                </div>
+                
 
-          <div class="card mx-auto box-shadow">
-            <div class="block_post">
-              <div class="image">
-                <% if post.image != nil %>
-                  <p>
-                    <% post.image.each do |img| %>
-                      <%= image_tag img.to_s, class:"card-img-top" %>
-                    <% end %>
-                  </p>
+                
+                <div class="modal-container">
+                  <div class="modal-body">
+                    
+                    <div class="modal-close">×</div>
+                    
+                    <div class="modal-content">
+                      <ul class="list-group text-center">
+                        <li class="list-group-item"><%= link_to "詳細を確認する", post_path(post.id), class:"text-secondary"  %></li>
+                        <li class="list-group-item"><%= link_to "投稿を編集する", edit_post_path(post.id), class:"text-secondary"  %></li>
+                        <li class="list-group-item"><%= link_to "投稿を削除する", post_path(post.id), method: :delete, class:"text-danger", data: { confirm: '投稿を削除してよろしいですか？'}  %></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+
+                
+                
+              </div>
+
+              <div class="image_area">
+                <% post.image.each do |img| %>
+                  <%= image_tag img.to_s %>
                 <% end %>
               </div>
-              <div class="name"><i class="fa-solid fa-user"></i> <%= post.user.name.truncate(14) %></div>
-              <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %></div>
-              <div class="text"><%= post.content.truncate(140) %></div>
-            </div>
-            
-            <div class="icons">
-              <% if post.user == current_user %>
-                <span class="edit">
-                  <span class="tooltips">編集</span>
-                  <%= link_to edit_post_path(post.id) do %>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  <% end %>
-                </span>
 
-                <span class="delete">
-                  <span class="tooltips">削除</span>
-                  <%= link_to post_path(post.id), method: :delete, data: { confirm: '投稿を削除してよろしいですか？'} do %>
-                    <i class="fa-sharp fa-solid fa-trash"></i>
-                  <% end %>
-                </span>
-              <% end %>
+              <div class="text_area">
 
-              <span class="show">
-                <span class="tooltips">詳細</span>
-                <%= link_to post_path(post.id) do %>
-                  <i class="fa-solid fa-file"></i>
+                <% if logged_in? %>
+                  <div class="icons">
+                    
+                    <span class="fav_icon">
+                      <br>
+                      <span class="tooltips">Favorite!</span>
+                      <%= link_to edit_post_path(post.id) do %>
+                        <i class="fa-regular fa-heart fa-2x text-muted"></i>    
+                      <% end %>
+                    </span>
+                  </div>
                 <% end %>
-              </span>
-            </div>
 
-  
-            
-          
-          </div>
+                <div class="contents">
+                  <%= post.content.truncate(9) %>
+                  <%= link_to post_path(post.id) do %> <p class="text-muted">詳細を確認する</p> <% end %>
+                </div>
+                <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
+                
+                
+              </div>
+            </div>
 
         </div>
-      </div>
-      
-  <% end %>
+  </div>
+  
     
+<% end %>
+  
 
 
 <%= link_to 'New Post', new_post_path %>
