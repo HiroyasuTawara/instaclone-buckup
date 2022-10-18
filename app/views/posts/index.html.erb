@@ -1,10 +1,11 @@
-<h4 class=" col-6 pt-3 pb-1">
+<h4 class="col-6 pt-3 pb-1">
   <% if logged_in? %>
     <%= link_to '+New Post', new_post_path, class:"btn btn-outline-primary" %>
   <% end %>
 </h4>
 
 <% @posts.each do |post| %>
+  <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
           <div class="post_block">
             <div class="block_text">
@@ -15,7 +16,7 @@
                   <%= post.user.name.truncate(14) %>
                 </div>
                 
-                <% if logged_in? %>
+                <% if current_user == post.user_id %>
                 <div class="menu_icon">
                   <div class="modal-open">
                     <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
@@ -53,16 +54,27 @@
               <div class="text_area">
 
                 <% if logged_in? %>
+
                   <div class="icons">
-                    
-                    <span class="fav_icon">
-                      <br>
-                      <span class="tooltips">Favorite!</span>
-                      <%= link_to edit_post_path(post.id) do %>
-                        <i class="fa-regular fa-heart fa-2x text-muted"></i>    
-                      <% end %>
-                    </span>
+                    <% unless @favorite.present? %>
+                      <span>
+                        <br>                       
+                        <span class="tooltips">Favorite!</span>
+                        <%= link_to favorites_path(post_id: post.id), method: :post do %>
+                          <i class="fa-regular fa-heart fa-2x text-muted"></i>
+                        <% end %>
+                      </span>
+                    <% else %>
+                      <span>
+                        <br> 
+                        <span class="tooltips">UnFavorite!</span>
+                        <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
+                          <i class="fa-solid fa-heart fa-2x text-danger"></i>
+                        <% end %>
+                      </span>
+                    <% end %>  
                   </div>
+
                 <% end %>
 
                 <div class="contents">
@@ -80,7 +92,3 @@
   
     
 <% end %>
-  
-
-
-<%= link_to 'New Post', new_post_path %>
