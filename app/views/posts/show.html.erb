@@ -10,8 +10,8 @@
         
         <% if current_user.id == @post.user_id %>
         <div class="menu_icon">
-          <div class="modal-open">
-            <i class="fa-solid fa-ellipsis fa-lg text-muted"></i>
+          <div class="modal-open", data-toggle="tooltip", title="投稿者用メニュー">
+            <i class="fa-solid fa-plus fa-lg text-muted"></i>
           </div>
         </div>
         
@@ -57,6 +57,6 @@
 
 <div class="row  pb-3 justify-content-center">
   <div class="md-4">
-    <%= link_to 'Back', posts_path,  class:"btn btn-secondary md-4" %>
+    <%= link_to 'top', posts_path,  class:"btn btn-secondary md-4" %>
   </div>
 </div>

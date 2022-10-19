@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   include SessionsHelper
   before_action :ensure_user, only: %i[ edit update destroy ]
-  skip_before_action :login_required, only:[:index, :show]
   # GET /posts
   def index
     @posts = Post.all
@@ -11,6 +10,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
   end
+  
 
   # GET /posts/new
   def new
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     return render :new if params[:back]
     if @post.save
-      redirect_to post_url(@post), notice: 'Post was successfully created.'
+      redirect_to posts_path, notice: '投稿しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,14 +34,14 @@ class PostsController < ApplicationController
 
   def confirm
     @post = Post.new(post_params)
-    @post.user_id = current_post.id 
+    @post.user_id = current_user.id
+    
     render :new if @post.invalid?
   end
 
-  # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to @post, notice: '更新しました。'
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    redirect_to posts_url, notice: '投稿を削除しました。'
   end
 
   private
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :user_id, { image: [] }, :image_cache)
+    params.require(:post).permit(:content, :user_id, {image: []}, :image_cache)
   end
 
 end

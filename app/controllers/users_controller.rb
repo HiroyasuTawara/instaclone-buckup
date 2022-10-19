@@ -7,6 +7,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    return redirect_to root_path unless current_user.id == user.id
+  end
+
+  def favs
+    @user = User.find(params[:id])
+    @user_favs = @user.favorite_posts
   end
 
   # GET /users/new

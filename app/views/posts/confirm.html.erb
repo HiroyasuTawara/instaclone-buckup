@@ -1,0 +1,49 @@
+<div class="row justify-content-center mb-5">
+  <%= form_with(model: @post, local:true) do |form| %>
+    <%= form.hidden_field :content %>
+    <%= form.hidden_field :image %>
+    <%= form.hidden_field :image_cache %>
+    
+    <div class="row post_block">
+      <div class="block_text">
+
+        <div class="post_header d-flex align-items-center">
+          <div class="name">
+            <%= image_tag @post.user.icon.url, class:"icon_image" %>
+            <%= @post.user.name.truncate(14) %>
+          </div>
+        </div>
+        <div class="image_area">
+          <% @post.image.each do |img| %>
+            <%= image_tag img.to_s %>
+            
+          <% end %>
+        </div>
+
+        <div class="text_area">
+
+          <div class="contents">
+            <%= @post.content %>
+          </div>
+          <div class="date">Post check</div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row pd-1 justify-content-center text-muted">
+      この内容で投稿してもよろしいですか？
+    </div>
+
+    <div class="row  pb-3 justify-content-center">
+      <div class="md-4">
+        <%= form.submit "投稿する", class:"btn btn-primary mt-2" %>
+        <%= form.submit "もどる", name: 'back',  class:"btn btn-secondary mt-2" %>
+      </div>
+  </div>
+  <% end %>
+</div>
+
+  
+
