@@ -1,4 +1,4 @@
-<% @user_favs.each do |post| %>
+<% @fav_posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
           <div class="post_block">
