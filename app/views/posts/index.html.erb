@@ -12,7 +12,7 @@
                 
                 <% if current_user.id == post.user_id %>
                 <div class="menu_icon">
-                  <div class="modal-open", data-toggle="tooltip", title="投稿者用メニュー">
+                  <div class="modal-open", id="modal<%= post.id.to_s %>", data-toggle="tooltip", title="投稿者用メニュー">
                     <i class="fa-solid fa-plus fa-lg text-muted"></i>
                   </div>
                 </div>
@@ -39,10 +39,36 @@
                 
               </div>
 
-              <div class="image_area">
-                <% post.image.each do |img| %>
-                  <%= image_tag img.to_s %>
-                <% end %>
+              <div class="image_area bg-secondary">
+                <div id="post<%= post.id.to_s %>" class="carousel slide" data-ride="carousel" data-interval="6000">
+                  <ol class="carousel-indicators">
+                    <li data-target= "#post<%= post.id.to_s %>" data-slide-to="0" class="active"></li>
+                    <% post.image.drop(1).count.times do |index| %>
+                      <li data-target="#post<%= post.id.to_s %>"  data-slide-to="#{index}"></li>
+                    <% end %>
+                  </ol>
+      
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <% post.image.first(1).each do |image| %>
+                        <%= image_tag image.to_s, class: "carousel_image"  %>
+                      <% end %>
+                    </div> 
+                    <% post.image.drop(1).each do |image| %>
+                      <div class="carousel-item">
+                        <%= image_tag image.to_s, class: "carousel_image" %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <a class="carousel-control-prev" href="#post<%= post.id.to_s %>" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#post<%= post.id.to_s %>" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
               </div>
 
               <div class="text_area">

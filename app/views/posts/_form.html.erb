@@ -25,7 +25,7 @@
     <div class="form-group row">
       <%= form.label :image, class:"col-sm-2 col-form-label" %>
       <div class="col-sm-10">
-        <%= form.file_field :image, required:true, multiple: true, class:"form-control" %>
+        <%= form.file_field :image, required:true, multiple: true, accept: 'image/jpg,image/jpeg,image/png,image/gif', class:"form-control" %>
         <p class="text-muted fw-light">画像を複数枚同時に投稿することができます。</p>
         
       </div>

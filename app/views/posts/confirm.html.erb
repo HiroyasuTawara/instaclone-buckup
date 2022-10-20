@@ -4,6 +4,7 @@
     <%= form.hidden_field :image %>
     <%= form.hidden_field :image_cache %>
     
+    <div class="row h4 pd-1 justify-content-center text-muted">投稿確認</div>
     <div class="row post_block">
       <div class="block_text">
 
@@ -13,21 +14,42 @@
             <%= @post.user.name.truncate(14) %>
           </div>
         </div>
-        <div class="image_area">
-          <% @post.image.each do |img| %>
-            <%= image_tag img.to_s %>
-            
-          <% end %>
+
+        <div class="image_areabg-secondary">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <% @post.image.drop(1).count.times do |index| %>
+                <li data-target="#carouselExampleIndicators" data-slide-to="#{index}"></li>
+              <% end %>
+            </ol>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <% @post.image.first(1).each do |image| %>
+                  <%= image_tag image.to_s, class: "carousel_image"  %>
+                <% end %>
+              </div> 
+              <% @post.image.drop(1).each do |image| %>
+                <div class="carousel-item">
+                  <%= image_tag image.to_s, class: "carousel_image" %>
+                </div>
+              <% end %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
         </div>
 
         <div class="text_area">
-
-          <div class="contents">
-            <%= @post.content %>
-          </div>
-          <div class="date">Post check</div>
-
-
+          <div class="contents"><%= @post.content %></div>
+          <div class="date">YY-MM-DD HH:mm (Posting date)</div>
         </div>
       </div>
     </div>
