@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
-          <div class="post_block">
+        <div class="post_block">
             <div class="block_text">
 
               <div class="post_header d-flex align-items-center">
@@ -12,17 +12,17 @@
                 
                 <% if current_user.id == post.user_id %>
                 <div class="menu_icon">
-                  <div class="modal-open", id="modal<%= post.id.to_s %>", data-toggle="tooltip", title="投稿者用メニュー">
+                  <div class="modal-open" data-target="#modal-<%= post.id.to_s %>" data-toggle="tooltip" title="投稿者用メニュー">
                     <i class="fa-solid fa-plus fa-lg text-muted"></i>
                   </div>
                 </div>
                 
 
                 
-                <div class="modal-container">
+                <div class="modal-container" id="modal-<%= post.id.to_s %>">
                   <div class="modal-body">
                     
-                    <div class="modal-close">×</div>
+                    <div class="modal-close" data-target="#modal-<%= post.id.to_s %>">×</div>
                     
                     <div class="modal-content">
                       <ul class="list-group text-center">

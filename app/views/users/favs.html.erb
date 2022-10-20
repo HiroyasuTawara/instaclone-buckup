@@ -1,82 +1,110 @@
+<div class="row h4 pd-1 justify-content-center text-muted">あなたのお気に入り投稿</div>
 <% @fav_posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
-          <div class="post_block">
-            <div class="block_text">
+  <div class="post_block">
 
-              <div class="post_header d-flex align-items-center">
-                <div class="name">
-                  <%= image_tag post.user.icon.url, class:"icon_image" %>
-                  <%= post.user.name.truncate(14) %>
-                </div>
-                
-                <% if current_user.id == post.user_id %>
-                <div class="menu_icon">
-                  <div class="modal-open", data-toggle="tooltip", title="投稿者用メニュー">
-                    <i class="fa-solid fa-plus fa-lg text-muted"></i>
-                  </div>
-                </div>
-                
+    <div class="block_text">
 
-                
-                <div class="modal-container">
-                  <div class="modal-body">
-                    
-                    <div class="modal-close">×</div>
-                    
-                    <div class="modal-content">
-                      <ul class="list-group text-center">
-                        <li class="list-group-item"><%= link_to "詳細を確認する", post_path(post.id), class:"text-secondary"  %></li>
-                        <li class="list-group-item"><%= link_to "投稿を編集する", edit_post_path(post.id), class:"text-secondary"  %></li>
-                        <li class="list-group-item"><%= link_to "投稿を削除する", post_path(post.id), method: :delete, class:"text-danger", data: { confirm: '投稿を削除してよろしいですか？'}  %></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <% end %>
-
-                
-                
-              </div>
-
-              <div class="image_area">
-                <% post.image.each do |img| %>
-                  <%= image_tag img.to_s %>
-                <% end %>
-              </div>
-
-              <div class="text_area">
-
-                <% if logged_in? %>
-
-                  <div class="icons">
-                    <% unless @favorite.present? %>
-                      <div data-toggle="tooltip", title="Favorite!">
-                        <%= link_to favorites_path(post_id: post.id), method: :post do %>
-                          <i class="fa-regular fa-heart fa-2x text-muted"></i>
-                        <% end %>
-                      </div>
-                    <% else %>
-                      <div data-toggle="tooltip", title="UnFavorite!">
-                        <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
-                          <i class="fa-solid fa-heart fa-2x text-danger"></i>
-                        <% end %>
-                      </div>
-                    <% end %>  
-                  </div>
-
-                <% end %>
-
-                <div class="contents">
-                  <%= post.content.truncate(28) %>
-                  <%= link_to post_path(post.id) do %> <p class="text-muted">+詳細を確認する</p> <% end %>
-                </div>
-                <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
-                
-                
-              </div>
-            </div>
-
+      <div class="post_header d-flex align-items-center">
+        <div class="name">
+          <%= image_tag post.user.icon.url, class:"icon_image" %>
+          <%= post.user.name.truncate(14) %>
         </div>
+        
+        <% if current_user.id == post.user_id %>
+        <div class="menu_icon">
+          <div class="modal-open" data-target="#modal-<%= post.id.to_s %>" data-toggle="tooltip" title="投稿者用メニュー">
+            <i class="fa-solid fa-plus fa-lg text-muted"></i>
+          </div>
+        </div>
+        
+
+        
+        <div class="modal-container" id="modal-<%= post.id.to_s %>">
+          <div class="modal-body">
+            
+            <div class="modal-close" data-target="#modal-<%= post.id.to_s %>">×</div>
+            
+            <div class="modal-content">
+              <ul class="list-group text-center">
+                <li class="list-group-item"><%= link_to "詳細を確認する", post_path(post.id), class:"text-secondary"  %></li>
+                <li class="list-group-item"><%= link_to "投稿を編集する", edit_post_path(post.id), class:"text-secondary"  %></li>
+                <li class="list-group-item"><%= link_to "投稿を削除する", post_path(post.id), method: :delete, class:"text-danger", data: { confirm: '投稿を削除してよろしいですか？'}  %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
+        
+        
+      </div>
+
+      <div class="image_area bg-secondary">
+        <div id="post<%= post.id.to_s %>" class="carousel slide" data-ride="carousel" data-interval="6000">
+          <ol class="carousel-indicators">
+            <li data-target= "#post<%= post.id.to_s %>" data-slide-to="0" class="active"></li>
+            <% post.image.drop(1).count.times do |index| %>
+              <li data-target="#post<%= post.id.to_s %>"  data-slide-to="#{index}"></li>
+            <% end %>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <% post.image.first(1).each do |image| %>
+                <%= image_tag image.to_s, class: "carousel_image"  %>
+              <% end %>
+            </div> 
+            <% post.image.drop(1).each do |image| %>
+              <div class="carousel-item">
+                <%= image_tag image.to_s, class: "carousel_image" %>
+              </div>
+            <% end %>
+          </div>
+          <a class="carousel-control-prev" href="#post<%= post.id.to_s %>" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#post<%= post.id.to_s %>" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="text_area">
+
+        <% if logged_in? %>
+
+          <div class="icons">
+            <% unless @favorite.present? %>
+              <div data-toggle="tooltip", title="Favorite!">
+                <%= link_to favorites_path(post_id: post.id), method: :post do %>
+                  <i class="fa-regular fa-heart fa-2x text-muted"></i>
+                <% end %>
+              </div>
+            <% else %>
+              <div data-toggle="tooltip", title="UnFavorite!">
+                <%= link_to favorite_path(id: @favorite.id), method: :delete do %>
+                  <i class="fa-solid fa-heart fa-2x text-danger"></i>
+                <% end %>
+              </div>
+            <% end %>  
+          </div>
+
+        <% end %>
+
+        <div class="contents">
+          <%= post.content.truncate(28) %>
+          <%= link_to post_path(post.id) do %> <p class="text-muted">+詳細を確認する</p> <% end %>
+        </div>
+        <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
+        
+        
+      </div>
+    </div>
+
+  </div>
   </div>
 <% end %>
