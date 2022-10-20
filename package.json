@@ -25,6 +25,7 @@
   "homepage": "https://github.com/HiroyasuTawara/DICwork_Insta-clone#readme",
   "dependencies": {
     "@rails/webpacker": "5.4.3",
+    "node": "^14.19.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
