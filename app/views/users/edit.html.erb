@@ -1,6 +1,5 @@
-
+<div class="row h4 pd-1 justify-content-center text-muted">アカウント情報を編集する</div>
 <div class="container bg-light rounded">
-<%= render 'form', user: @user %>
-
-<%= link_to '⇦編集を破棄して戻る', user_path(@user.id), class:"text-muted" %>
+  <%= render 'form', user: @user %>
+  <%= link_to '⇦編集を破棄して戻る', user_path(@user.id), class:"text-muted" %>
 </div>

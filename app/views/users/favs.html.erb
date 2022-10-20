@@ -2,30 +2,22 @@
 <% @fav_posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
-  <div class="post_block">
-
-    <div class="block_text">
-
+    <div class="post_block">
+      <div class="block_text">
       <div class="post_header d-flex align-items-center">
         <div class="name">
           <%= image_tag post.user.icon.url, class:"icon_image" %>
           <%= post.user.name.truncate(14) %>
         </div>
-        
         <% if current_user.id == post.user_id %>
         <div class="menu_icon">
           <div class="modal-open" data-target="#modal-<%= post.id.to_s %>" data-toggle="tooltip" title="投稿者用メニュー">
             <i class="fa-solid fa-plus fa-lg text-muted"></i>
           </div>
-        </div>
-        
-
-        
+        </div>        
         <div class="modal-container" id="modal-<%= post.id.to_s %>">
-          <div class="modal-body">
-            
-            <div class="modal-close" data-target="#modal-<%= post.id.to_s %>">×</div>
-            
+          <div class="modal-body">            
+            <div class="modal-close" data-target="#modal-<%= post.id.to_s %>">×</div>            
             <div class="modal-content">
               <ul class="list-group text-center">
                 <li class="list-group-item"><%= link_to "詳細を確認する", post_path(post.id), class:"text-secondary"  %></li>
@@ -35,12 +27,8 @@
             </div>
           </div>
         </div>
-        <% end %>
-
-        
-        
+        <% end %>        
       </div>
-
       <div class="image_area bg-secondary">
         <div id="post<%= post.id.to_s %>" class="carousel slide" data-ride="carousel" data-interval="6000">
           <ol class="carousel-indicators">
@@ -49,7 +37,6 @@
               <li data-target="#post<%= post.id.to_s %>"  data-slide-to="#{index}"></li>
             <% end %>
           </ol>
-
           <div class="carousel-inner">
             <div class="carousel-item active">
               <% post.image.first(1).each do |image| %>
@@ -72,11 +59,8 @@
           </a>
         </div>
       </div>
-
       <div class="text_area">
-
         <% if logged_in? %>
-
           <div class="icons">
             <% unless @favorite.present? %>
               <div data-toggle="tooltip", title="Favorite!">
@@ -92,19 +76,14 @@
               </div>
             <% end %>  
           </div>
-
         <% end %>
-
         <div class="contents">
           <%= post.content.truncate(28) %>
           <%= link_to post_path(post.id) do %> <p class="text-muted">+詳細を確認する</p> <% end %>
         </div>
-        <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>
-        
-        
+        <div class="date"><%= post.created_at.strftime("%y-%m-%d %H:%M") %> Posted</div>        
+      </div>
       </div>
     </div>
-
-  </div>
   </div>
 <% end %>
