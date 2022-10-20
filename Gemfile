@@ -51,3 +51,7 @@ gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem 'faker'
 gem 'rexml'
+
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
