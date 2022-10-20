@@ -1,31 +1,32 @@
 class PostsController < ApplicationController
   include SessionsHelper
   before_action :ensure_user, only: %i[ edit update destroy ]
-  # GET /posts
+
   def index
     @posts = Post.all
   end
 
-  # GET /posts/1
+
   def show
     @post = Post.find(params[:id])
   end
   
 
-  # GET /posts/new
+
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
+
   def edit
   end
 
-  # POST /posts
+
   def create
     @post = current_user.posts.build(post_params)
     return render :new if params[:back]
     if @post.save
+      PostCompleteMailer.post_complete(@post.user).deliver
       redirect_to posts_path, notice: '投稿しました'
     else
       render :new, status: :unprocessable_entity
