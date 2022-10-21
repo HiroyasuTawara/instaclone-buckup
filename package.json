@@ -25,6 +25,7 @@
   "homepage": "https://github.com/HiroyasuTawara/DICwork_Insta-clone#readme",
   "dependencies": {
     "@rails/webpacker": "5.4.3",
+    "bootstrap": "^5.2.2",
     "node": "^14.19.0",
     "rails-ujs": "^5.2.8-1",
     "turbolinks": "^5.2.0",
