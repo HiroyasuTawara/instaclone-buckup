@@ -9,7 +9,7 @@ environment.plugins.prepend(
     jQuery: "jquery",
     jquery: "jquery",
     Popper: ["popper.js", "default"],
-    Rails: '@rails/ujs'
+    Rails: "@rails/ujs",
   })
 );
 
