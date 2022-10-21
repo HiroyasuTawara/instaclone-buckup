@@ -30,7 +30,7 @@
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "node": "^14.19.0",
-    "rails-ujs": "^5.2.8-1",
+    "@rails/ujs": "^5.2.8-1",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
