@@ -120,4 +120,9 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener_web
+
+  config.assets.js_compressor = :uglifier
+  config.assets.css_compressor = :scss
+  config.public_file_server.enabled = true
+  config.assets.compile = true
 end
