@@ -48,7 +48,7 @@ gem 'mini_magick'
 gem 'bcrypt'
 
 gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
+
 gem 'faker'
 gem 'rexml'
 
