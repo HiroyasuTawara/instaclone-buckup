@@ -20,6 +20,7 @@ module Copygram
       g.helper false
     end
 
+    config.assets.initialize_on_precompile = false
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
