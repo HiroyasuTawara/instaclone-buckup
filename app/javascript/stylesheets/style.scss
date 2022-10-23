@@ -1,7 +1,26 @@
-div [class^="container-fluid"]{
+[class^="container-fluid"]{
   margin-left: auto;
   margin-right: auto;
   max-width: 510px;
+}
+
+.notice{
+  color: red;
+  background-color: #ffffff;
+  animation-name: fadeOutAnime;
+  animation-fill-mode: forwards;
+  animation-delay: 1.0s;
+  animation-duration: 4.0s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes fadeOutAnime{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
 }
 
 nav {

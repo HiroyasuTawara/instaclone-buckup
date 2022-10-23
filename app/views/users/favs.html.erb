@@ -1,4 +1,4 @@
-<div class="row h4 pd-1 justify-content-center text-muted">あなたがお気に入りした投稿</div>
+<div class="row h4 pb-1 justify-content-center text-muted">あなたがお気に入りした投稿</div>
 <% @fav_posts.each do |post| %>
   <% @favorite = current_user.favorites.find_by(post_id: post.id)  %>
   <div class="row justify-content-center mb-5">
