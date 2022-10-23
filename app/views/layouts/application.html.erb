@@ -34,7 +34,7 @@
                     <%= link_to favs_user_path(current_user.id),  class:"nav-link" do %><i class="fa-solid fa-heart text-white"><span class="d-lg-none"> お気に入り一覧</span></i><% end %>
                   </li>
                   <li class="nav-item active" , data-toggle="tooltip", title="ログアウト">
-                    <%= link_to session_path(current_user.id), method: :delete, class: "nav-link" do %><i data-toggle="tooltip" title="ログアウト" class="fa-solid fa-right-from-bracket"><span class="d-lg-none"> ログアウト</span></i><% end %>
+                    <%= link_to session_path(current_user.id), method: :delete, class: "nav-link" do %><i class="fa-solid fa-right-from-bracket"><span class="d-lg-none"> ログアウト</span></i><% end %>
                   </li>
                   <li class="nav-item active", data-toggle="tooltip", title="ホーム">
                     <%= link_to posts_path, class: "nav-link" do %><i class="fa-solid fa-house"><span class="d-lg-none"> ホーム</span></i><% end %>
