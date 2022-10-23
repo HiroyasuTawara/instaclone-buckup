@@ -5,7 +5,11 @@
       <div class="block_text">
         <div class="post_header d-flex align-items-center">
           <div class="name">
-            <%= image_tag post.user.icon.url, class:"icon_image" %>
+            <% if @user.icon? %>
+              <%= image_tag @user.icon.url, class:"icon_image" %>
+            <% else %>
+              <%= image_tag 'user_default_icon.png', class:"icon_image" %>
+            <% end %>
             <%= post.user.name.truncate(14) %>
           </div>
           
@@ -31,7 +35,7 @@
           <% end %>
         </div>
         <div class="image_area bg-secondary">
-          <% until post.image == nill %>
+          
           <div id="post<%= post.id.to_s %>" class="carousel slide" data-ride="carousel" data-interval="6000">
             <ol class="carousel-indicators">
               <li data-target= "#post<%= post.id.to_s %>" data-slide-to="0" class="active"></li>
@@ -60,9 +64,7 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          <% else %>
-          <div class="error-images">Sorry! Image not found.</div>
-          <% end %>
+          
         </div>
         <div class="text_area">
           <% if logged_in? %>

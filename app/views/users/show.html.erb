@@ -9,7 +9,11 @@
   </div>
 
   <div class="row  mb-4 justify-content-center">
+    <% if @user.icon? %>
       <%= image_tag @user.icon.url, class:"icon_image" %>
+    <% else %>
+      <%= image_tag 'user_default_icon.png', class:"icon_image" %>
+    <% end %>
   </div>
   
   <div class="row  mb-4 justify-content-center">
