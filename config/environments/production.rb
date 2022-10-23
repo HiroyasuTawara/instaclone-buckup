@@ -129,7 +129,7 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
-end
+
   config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :scss
   config.public_file_server.enabled = true
