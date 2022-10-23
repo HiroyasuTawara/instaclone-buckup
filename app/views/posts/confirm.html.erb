@@ -11,7 +11,11 @@
         
         <div class="post_header d-flex align-items-center">
           <div class="name">
-            <%= image_tag @post.user.icon.url, class:"icon_image" %>
+            <% if @post.user.icon? %>
+              <%= image_tag @post.user.icon.url, class:"icon_image" %>
+            <% else %>
+              <%= image_tag 'user_default_icon.png', class:"icon_image" %>
+            <% end %>
             <%= @post.user.name.truncate(14) %>
           </div>
         </div>
