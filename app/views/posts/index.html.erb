@@ -31,6 +31,7 @@
           <% end %>
         </div>
         <div class="image_area bg-secondary">
+          <% until post.image == nill %>
           <div id="post<%= post.id.to_s %>" class="carousel slide" data-ride="carousel" data-interval="6000">
             <ol class="carousel-indicators">
               <li data-target= "#post<%= post.id.to_s %>" data-slide-to="0" class="active"></li>
@@ -59,6 +60,9 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+          <% else %>
+          <div class="error-images">Sorry! Image not found.</div>
+          <% end %>
         </div>
         <div class="text_area">
           <% if logged_in? %>
