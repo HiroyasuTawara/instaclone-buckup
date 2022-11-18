@@ -67,3 +67,4 @@ gem 'uglifier'
 gem 'fog-aws'
 gem 'dotenv-rails'
 gem 'unicorn' 
+gem 'aws-sdk-s3', require: false
