@@ -18,10 +18,10 @@ CarrierWave.configure do |config|
 
   case Rails.env
     when 'production'
-      config.fog_directory = 'copystagram-production'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/copystagram-production'
+      config.fog_directory = 'copygram-production'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/copygram-production'
     when 'development'
-      config.fog_directory = 'copystagram-develop'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/copystagram-develo'
+      config.fog_directory = 'copygram-development'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/copygram-development'
   end
 end
