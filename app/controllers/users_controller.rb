@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to user_path(@user.id), notice: "User was successfully created." 
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_user_path, status: :unprocessable_entity
     end
   end
 

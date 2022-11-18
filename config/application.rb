@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Copygram
   class Application < Rails::Application
+    config.action_view.form_with_generates_remote_forms = true
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 

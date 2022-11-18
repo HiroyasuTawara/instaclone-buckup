@@ -3,7 +3,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   
-  storage :file
+  storage :fog
   
 
   # Override the directory where uploaded files will be stored.
