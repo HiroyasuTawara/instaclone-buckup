@@ -84,4 +84,3 @@ production:
   database: copygram_production
   username: copygram
   password: <%= ENV['COPYGRAM_DATABASE_PASSWORD'] %>
-  port: 5432
